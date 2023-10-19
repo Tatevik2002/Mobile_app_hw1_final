@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 fun problem1(){
     val array1 = arrayOf(3,4,9,11,0)
     val list1 = listOf(2,3,4,11,26)
@@ -41,6 +44,7 @@ fun problem3(){
 }
 
 fun problem4(number: Int): String = when {
+
     number > 0 -> "positive"
     number < 0 -> "negative"
     else -> "zero"
@@ -77,13 +81,29 @@ fun problem6(number1:Double?, number2:Double?):Double{
     return number1/number2
 }
 
+fun problem7():String{
+    val date = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    return date.format(formatter)
 
 
 
 }
+open class Person(val name: String,val surname :String ,val age: Int, val dateOfBirth:String) {}
 
+class Person2(name: String, surname: String, age: Int, dateOfBirth: String) : Person(name, surname, age,
+    dateOfBirth
+){
+    fun calculateAgeStage() = when {
+            age < 13 -> "Child"
+            age in 13..19 -> "Teenager"
+            else -> "Adult" }
+}
+fun problem10(){
+    val ourList = listOf(20,10,2002,-20,11,23,56,89,90,77)
 
-
+    println(ourList.filter { it % 2 == 0 })
+}
 fun main(){
     problem1()
     problem2()
@@ -93,5 +113,18 @@ fun main(){
     println(problem4(0))
     println(problem4(108))
     problem5()
+    println(problem6(1.0,2.0))
+    println(problem7())
+    val person = Person("Tatevik", "Davtyan",21,"20.09.2002")
+    println("Person's Name: ${person.name}")
+    println("Person's surname: ${person.surname}")
+    println("Person's age: ${person.age}")
+    println("Person's date of birth: ${person.dateOfBirth}")
+    val person2 = Person2("Tatevik", "Davtyan",21,"20.09.2002")
+    println(person2.calculateAgeStage())
+    problem10()
+
+
+
 
 }
